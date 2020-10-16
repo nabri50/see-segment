@@ -439,7 +439,11 @@ class Evolver(object):
                 for cur_p in range(len(population)):
                     logging.getLogger().info(population[cur_p])
             if cur_g < ngen+1:
-                population = self.mutate(population)
+                 if bestsofar.fitness.values > 1.0:
+                     population = self.newpopulation()
+                #     population = self.mutate(population)
+                 else:
+                   population = self.mutate(population)
             
         if checkpoint:
             print(f"Writing Checkpoint file - {checkpoint}")
